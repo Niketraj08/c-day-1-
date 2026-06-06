@@ -4,6 +4,8 @@
 
 // Eg : 371 is an armstrong number.
 // 3*3*3 + 7*7*7 + 1*1*1 = 371
+// Eg : 123 is not an armstrong number.
+// 1*1*1 + 2*2*2 + 3*3
 
 #include <iostream>
 using namespace std;
