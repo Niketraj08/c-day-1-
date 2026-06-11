@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <title>Akki STUDY X Premium</title>
+
+    <!-- 🟢 FIXED: Removed Forced Reload Script. React handles BFCache smoothly now! -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <script>
+        const isRunningInMobileApp = navigator.userAgent.includes("AkkiStudyX_App") || window.ReactNativeWebView;
+
+        if (!isRunningInMobileApp) {
+            const osScript = document.createElement('script');
+            osScript.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
+            osScript.defer = true;
+            document.head.appendChild(osScript);
+
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            OneSignalDeferred.push(function(OneSignal) {
+                OneSignal.init({
+                    appId: "c881504a-85e0-48c7-a034-8ddf489402d8",
+                    safari_web_id: "web.onesignal.auto.1234567",
+                    notifyButton: { enable: true, position: 'bottom-right', theme: 'default' }
+                });
+            });
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        body {
+            background: #f8fafc;
+            background-image:
+                radial-gradient(at 0% 0%, hsla(280, 100%, 95%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(220, 100%, 93%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(320, 100%, 94%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(180, 100%, 90%, 1) 0px, transparent 50%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: calc(90px + env(safe-area-inset-bottom));
+            overscroll-behavior-y: none;
+            color: #1e293b;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .tab-active {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white !important;
+            box-shadow: 0 4px 10px -2px rgba(124, 58, 237, 0.3);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-inactive {
+            background: white;
+            color: #475569;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .collection-card {
+            background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .collection-card:active {
+            transform: scale(0.97);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .slide-up {
+            animation: slideUp 0.4s ease forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.25s ease forwards;
+        }
+
+        .animate-slide-in-left {
+            animation: slideInLeft 0.22s ease forwards;
+        }
+
+        .animate-slide-in-right {
+            animation: slideInRight 0.22s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .floating-nav {
+            border-radius: 30px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15);
+            z-index: 50;
+            padding: 8px 12px;
+        }
+        @media (max-width: 767px) {
+            .floating-nav {
+                position: fixed;
+                bottom: calc(20px + env(safe-area-inset-bottom));
+                left: 50%;
+                transform: translateX(-50%);
+                width: 92%;
+                max-width: 400px;
+            }
+        }
+
+        .snap-x-container {
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+    <div id="root">
+        <style>
+            @keyframes pulse-glow {
+                0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 70, 239, 0.4); }
+                70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(217, 70, 239, 0); }
+                100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 70, 239, 0); }
+            }
+
+            @keyframes loading-bar {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(200%); }
+            }
+
+            @keyframes fade-in-logo {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            .splash-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                width: 100vw;
+                background-color: #f8fafc;
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 9999;
+            }
+
+            .splash-logo {
+                width: 70px;
+                height: 70px;
+                border-radius: 20px;
+                background: linear-gradient(135deg, #6366f1, #d946ef);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+                animation: pulse-glow 2s infinite, fade-in-logo 0.5s ease-out;
+            }
+
+            .splash-logo svg {
+                width: 35px;
+                height: 35px;
+                fill: white;
+                margin-left: 4px;
+            }
+
+            .splash-title {
+                font-weight: 800;
+                font-size: 22px;
+                color: #1e293b;
+                letter-spacing: 1px;
+                margin: 0;
+                animation: fade-in-logo 0.6s ease-out;
+            }
+
+            .splash-subtitle {
+                font-weight: 700;
+                font-size: 11px;
+                color: #8b5cf6;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                margin-top: 5px;
+                animation: fade-in-logo 0.7s ease-out;
+            }
+
+            .splash-loader-track {
+                margin-top: 40px;
+                width: 80px;
+                height: 4px;
+                background: #e2e8f0;
+                border-radius: 4px;
+                overflow: hidden;
+                animation: fade-in-logo 0.8s ease-out;
+            }
+
+            .splash-loader-thumb {
+                width: 50%;
+                height: 100%;
+                background: linear-gradient(90deg, #6366f1, #d946ef);
+                border-radius: 4px;
+                animation: loading-bar 1s infinite ease-in-out;
+            }
+        </style>
+
+        <div class="splash-container">
+            <div class="splash-logo">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5.14v14.72a1 1 0 001.5.86l11-7.36a1 1 0 000-1.72l-11-7.36a1 1 0 00-1.5.86z"/>
+                </svg>
+            </div>
+            <h2 class="splash-title">AKKIgfrrgfdfdfdfdfdf</h2>
+            <p class="splash-subtitle">Premium Edition</p>
+            <div class="splash-loader-track">
+                <div class="splash-loader-thumb"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🟢 FIXED: Version updated to v=42 to clear browser cache immediately -->
+    <script src="/static/js/components/Shared.js?v=42" type="text/babel"></script>
+    <script src="/static/js/components/OtherScreens.js?v=42" type="text/babel"></script>
+    <script src="/static/js/components/HomeScreen.js?v=42" type="text/babel"></script>
+    <script src="/static/js/components/ContentScreen.js?v=42" type="text/babel"></script>
+    <script src="/static/js/components/ProfileScreen.js?v=42" type="text/babel"></script>
+    <script src="/static/js/components/App.js?v=42" type="text/babel"></script>
+</body>
+</html>
