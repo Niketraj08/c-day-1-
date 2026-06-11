@@ -1,6 +1,7 @@
 //OUESTION 
 // print the largest number of 3 number
-
+// INPUT : 3 4 5
+// OUTPUT : 5
 #include <iostream>
 using namespace std;
 int main()
